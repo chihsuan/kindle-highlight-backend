@@ -3,17 +3,17 @@ package users
 import (
 	"time"
 
-	"kindle-notes/common"
-	"kindle-notes/notes"
-	"kindle-notes/readhistory"
+	"kindle-highlight/common"
+	"kindle-highlight/highlights"
+	"kindle-highlight/readhistory"
 )
 
 type UserModel struct {
-	ID               uint   `gorm:"primary_key"`
-	Email            string `gorm:"column:email;unique_index"`
-	ReadingHistories []readhistory.ReadHistoryModel
-	Notes            []notes.NoteModel
-	CreatedAt        time.Time // Set to current time if it is zero on creating
+	ID               uint                           `gorm:"primary_key"`
+	Email            string                         `gorm:"column:email;unique_index"`
+	ReadingHistories []readhistory.ReadHistoryModel `gorm:"foreignKey:UserID"`
+	Highlights       []highlights.HighlightModel    `gorm:"foreignKey:UserID"`
+	CreatedAt        time.Time                      // Set to current time if it is zero on creating
 }
 
 // Migrate the schema of database if needed

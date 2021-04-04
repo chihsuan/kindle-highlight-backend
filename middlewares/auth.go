@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	"kindle-notes/common"
+	"kindle-highlight/common"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
@@ -36,7 +36,7 @@ var MyAuth2Extractor = &request.MultiExtractor{
 
 // A helper to write user_id and user_model to the context
 func UpdateContextUserModel(c *gin.Context, my_user_id uint) {
-	c.Set("my_user_id", my_user_id)
+	c.Set("current_user_id", my_user_id)
 }
 
 // You can custom middlewares yourself as the doc: https://github.com/gin-gonic/gin#custom-middleware

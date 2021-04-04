@@ -1,11 +1,31 @@
 package users
 
 import (
-	"kindle-notes/common"
+	"kindle-highlight/common"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
+
+func create(c *gin.Context) {
+	createValidator := CreateValidator{}
+	if err := c.ShouldBind(&createValidator); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	user, err := FindOne(&UserModel{Email: createValidator.Email})
+	if err != nil {
+		user = UserModel{Email: createValidator.Email}
+		if err := SaveOne(&user); err != nil {
+			c.JSON(http.StatusUnprocessableEntity, err)
+			return
+		}
+	}
+
+	serializer := UserSerializer{c}
+	c.JSON(http.StatusOK, gin.H{"user": serializer.Serialize(user)})
+}
 
 func login(c *gin.Context) {
 	loginValidator := LoginValidator{}

@@ -6,4 +6,5 @@ import (
 
 func Route(router *gin.RouterGroup) {
 	router.POST("/login", login)
+	router.POST("/users", create)
 }

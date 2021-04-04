@@ -1,11 +1,12 @@
 package common
 
 import (
+	"database/sql"
 	"fmt"
 	"os"
 
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
 type DataBase struct {
@@ -16,31 +17,32 @@ var DB *gorm.DB
 
 // Opening a database and save the reference to `Database` struct.
 func Init() *gorm.DB {
-	db, err := gorm.Open("sqlite3", "./gorm.db")
+	db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{})
 	if err != nil {
 		fmt.Println("db err: (Init) ", err)
 	}
-	db.DB().SetMaxIdleConns(10)
+	sqlDB, err := db.DB()
+	sqlDB.SetMaxIdleConns(10)
 	DB = db
 	return DB
 }
 
 // This function will create a temporarily database for running testing cases
-func TestDBInit() *gorm.DB {
-	test_db, err := gorm.Open("sqlite3", "./../gorm_test.db")
+func TestDBInit() *sql.DB {
+	test_db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{})
 	if err != nil {
 		fmt.Println("db err: (TestDBInit) ", err)
 	}
-	test_db.DB().SetMaxIdleConns(3)
-	test_db.LogMode(true)
-	DB = test_db
-	return DB
+	sqlDB, err := test_db.DB()
+	sqlDB.SetMaxOpenConns(3)
+	return sqlDB
 }
 
 // Delete the database after running testing cases.
 func TestDBFree(test_db *gorm.DB) error {
-	test_db.Close()
-	err := os.Remove("./../gorm_test.db")
+	sqlDB, err := test_db.DB()
+	sqlDB.Close()
+	err = os.Remove("./gorm_test.db")
 	return err
 }
 

@@ -3,20 +3,20 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 
-	"kindle-notes/books"
-	"kindle-notes/common"
-	"kindle-notes/middlewares"
-	"kindle-notes/notes"
-	"kindle-notes/readhistory"
-	"kindle-notes/users"
+	"kindle-highlight/books"
+	"kindle-highlight/common"
+	"kindle-highlight/highlights"
+	"kindle-highlight/middlewares"
+	"kindle-highlight/readhistory"
+	"kindle-highlight/users"
 )
 
 func Migrate(db *gorm.DB) {
 	users.AutoMigrate()
 	books.AutoMigrate()
-	notes.AutoMigrate()
+	highlights.AutoMigrate()
 	readhistory.AutoMigrate()
 }
 
@@ -25,13 +25,14 @@ func SetupAPIRoutes(v1 *gin.RouterGroup) {
 	users.Route(v1)
 	books.Route(v1)
 	readhistory.Route(v1)
-	notes.Route(v1)
+	highlights.Route(v1)
 }
 
 func main() {
 	db := common.Init()
 	Migrate(db)
-	defer db.Close()
+	sqlDB, _ := db.DB()
+	defer sqlDB.Close()
 
 	r := gin.Default()
 	SetupAPIRoutes(r.Group("/api/v1"))

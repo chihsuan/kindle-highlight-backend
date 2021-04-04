@@ -1,4 +1,4 @@
-# kindle-notes-backend
+# kindle-highlight-backend
 
 Run server
 

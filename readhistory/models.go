@@ -3,8 +3,8 @@ package readhistory
 import (
 	"time"
 
-	"kindle-notes/books"
-	"kindle-notes/common"
+	"kindle-highlight/books"
+	"kindle-highlight/common"
 )
 
 type ReadHistoryModel struct {

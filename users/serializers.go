@@ -3,7 +3,7 @@ package users
 import (
 	"github.com/gin-gonic/gin"
 
-	"kindle-notes/common"
+	"kindle-highlight/common"
 )
 
 type UserSerializer struct {
