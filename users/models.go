@@ -3,9 +3,9 @@ package users
 import (
 	"time"
 
-	"kindle-notes/apps/common"
-	"kindle-notes/apps/notes"
-	"kindle-notes/apps/readhistory"
+	"kindle-notes/common"
+	"kindle-notes/notes"
+	"kindle-notes/readhistory"
 )
 
 type UserModel struct {

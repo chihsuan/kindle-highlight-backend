@@ -1,8 +1,8 @@
 package notes
 
 import (
-	"kindle-notes/apps/books"
-	"kindle-notes/apps/common"
+	"kindle-notes/books"
+	"kindle-notes/common"
 )
 
 type NoteModel struct {

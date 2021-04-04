@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	"kindle-notes/apps/common"
+	"kindle-notes/common"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"

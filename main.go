@@ -5,11 +5,11 @@ import (
 
 	"github.com/jinzhu/gorm"
 
-	"kindle-notes/apps/books"
-	"kindle-notes/apps/common"
-	"kindle-notes/apps/notes"
-	"kindle-notes/apps/readhistory"
-	"kindle-notes/apps/users"
+	"kindle-notes/books"
+	"kindle-notes/common"
+	"kindle-notes/notes"
+	"kindle-notes/readhistory"
+	"kindle-notes/users"
 )
 
 func Migrate(db *gorm.DB) {

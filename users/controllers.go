@@ -1,7 +1,7 @@
 package users
 
 import (
-	"kindle-notes/apps/common"
+	"kindle-notes/common"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

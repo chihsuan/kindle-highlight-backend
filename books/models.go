@@ -1,7 +1,7 @@
 package books
 
 import (
-	"kindle-notes/apps/common"
+	"kindle-notes/common"
 )
 
 type BookModel struct {
