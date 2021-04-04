@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+
+vendorx/*
+!vendorx/vendor.json
+
+tmp/*
+*.db
+coverage.txt
+
+bak.*
+token.json
+credentials.json
