@@ -7,6 +7,7 @@ import (
 
 	"kindle-notes/books"
 	"kindle-notes/common"
+	"kindle-notes/middlewares"
 	"kindle-notes/notes"
 	"kindle-notes/readhistory"
 	"kindle-notes/users"
@@ -20,7 +21,7 @@ func Migrate(db *gorm.DB) {
 }
 
 func SetupAPIRoutes(v1 *gin.RouterGroup) {
-	v1.Use(users.AuthMiddleware(false))
+	v1.Use(middlewares.AuthMiddleware(false))
 	users.Route(v1)
 	books.Route(v1)
 	readhistory.Route(v1)

@@ -1,11 +1,14 @@
 package readhistory
 
 import (
+	"kindle-notes/middlewares"
+
 	"github.com/gin-gonic/gin"
 )
 
 func Route(router *gin.RouterGroup) {
 	readHistory := router.Group("/readHistory")
 	readHistory.POST("/", create)
-	readHistory.GET("/user", getAllByUser)
+	users := readHistory.Group("/users").Use(middlewares.AuthMiddleware(true))
+	users.GET("/", getAllByUser)
 }
