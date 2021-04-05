@@ -1,7 +1,6 @@
 package books
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -19,7 +18,6 @@ func create(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, err)
 	}
-	fmt.Printf("log %s", bookInDB.Name)
 
 	serializer := BookSerializer{c}
 	c.JSON(http.StatusOK, gin.H{"book": serializer.Serialize(bookInDB)})

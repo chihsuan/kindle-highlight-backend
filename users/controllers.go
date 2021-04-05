@@ -50,5 +50,17 @@ func login(c *gin.Context) {
 	}
 
 	serializer := UserSerializer{c}
+	c.JSON(http.StatusOK, gin.H{"user": serializer.Serialize(user), "token": common.GenToken(user.ID)})
+}
+
+func getMe(c *gin.Context) {
+	userID := c.MustGet("current_user_id").(uint)
+	user, err := FindOne(&UserModel{ID: userID})
+	if err != nil {
+		c.JSON(http.StatusNotFound, err)
+		return
+	}
+
+	serializer := UserSerializer{c}
 	c.JSON(http.StatusOK, gin.H{"user": serializer.Serialize(user)})
 }

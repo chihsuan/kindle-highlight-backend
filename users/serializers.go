@@ -2,8 +2,6 @@ package users
 
 import (
 	"github.com/gin-gonic/gin"
-
-	"kindle-highlight/common"
 )
 
 type UserSerializer struct {
@@ -14,14 +12,12 @@ type UserResponse struct {
 	ID       uint   `json:"id"`
 	Username string `json:"username"`
 	Email    string `json:"email"`
-	Token    string `json:"token"`
 }
 
 func (serializer *UserSerializer) Serialize(userModel UserModel) UserResponse {
 	user := UserResponse{
 		ID:    userModel.ID,
 		Email: userModel.Email,
-		Token: common.GenToken(userModel.ID),
 	}
 	return user
 }
