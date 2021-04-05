@@ -12,11 +12,10 @@ func create(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	userID := c.MustGet("current_user_id").(uint)
 
 	highlights := []HighlightModel{}
 	for _, highlight := range validator.Highlights {
-		highlights = append(highlights, HighlightModel{BookID: validator.BookID, UserID: userID, Highlight: highlight})
+		highlights = append(highlights, HighlightModel{BookID: validator.BookID, UserID: validator.UserID, Highlight: highlight})
 	}
 	_, err := SaveAll(highlights)
 	if err != nil {

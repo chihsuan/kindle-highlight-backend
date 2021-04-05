@@ -8,7 +8,7 @@ type HighlightListSerializer struct {
 
 type HighlightResponse struct {
 	ID        uint   `json:"id"`
-	Highlight string `json:"content"`
+	Highlight string `json:"highlight"`
 }
 
 func (serializer *HighlightListSerializer) Serialize(noteModels []HighlightModel) []HighlightResponse {
