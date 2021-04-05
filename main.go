@@ -3,14 +3,15 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 
-	"gorm.io/gorm"
-
 	"kindle-highlight/books"
 	"kindle-highlight/common"
 	"kindle-highlight/highlights"
 	"kindle-highlight/middlewares"
 	"kindle-highlight/readhistory"
 	"kindle-highlight/users"
+
+	"github.com/gin-contrib/cors"
+	"gorm.io/gorm"
 )
 
 func Migrate(db *gorm.DB) {
@@ -35,6 +36,11 @@ func main() {
 	defer sqlDB.Close()
 
 	r := gin.Default()
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"*"},
+		AllowHeaders: []string{"Origin", "Authorization", "content-type"},
+	}))
+
 	SetupAPIRoutes(r.Group("/api/v1"))
 
 	healthCheckAuth := r.Group("/api/healthy")
