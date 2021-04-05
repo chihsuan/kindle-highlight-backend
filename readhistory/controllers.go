@@ -22,13 +22,8 @@ func create(c *gin.Context) {
 }
 
 func getAllByUser(c *gin.Context) {
-	validator := GetAllValidator{}
-	if err := c.Bind(&validator); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	readHistory := ReadHistoryModel{UserID: validator.UserID}
+	userID := c.MustGet("current_user_id").(uint)
+	readHistory := ReadHistoryModel{UserID: userID}
 
 	readHistoriesInDB, err := FindAll(&readHistory)
 	if err != nil {
