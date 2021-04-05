@@ -56,7 +56,6 @@ func AuthMiddleware(auto401 bool) gin.HandlerFunc {
 		}
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 			my_user_id := uint(claims["id"].(float64))
-			//fmt.Println(my_user_id,claims["id"])
 			UpdateContextUserModel(c, my_user_id)
 		}
 	}
