@@ -13,6 +13,8 @@ func create(c *gin.Context) {
 		return
 	}
 
+	DeleteAll(validator.UserID, validator.BookID)
+
 	highlights := []HighlightModel{}
 	for _, highlight := range validator.Highlights {
 		highlights = append(highlights, HighlightModel{BookID: validator.BookID, UserID: validator.UserID, Highlight: highlight})

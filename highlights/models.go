@@ -27,6 +27,11 @@ func FindAll(condition interface{}) ([]HighlightModel, error) {
 	return models, err
 }
 
+func DeleteAll(userID uint, bookID uint) {
+	db := common.GetDB()
+	db.Debug().Delete(HighlightModel{}, "user_id = ? and book_id = ?", userID, bookID)
+}
+
 func FindOneOrCreate(condition interface{}, highlight HighlightModel) (HighlightModel, error) {
 	highlightInDB, err := FindOne(condition)
 	if err != nil {
